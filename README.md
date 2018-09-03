@@ -6,6 +6,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/WBWebView.svg?style=flat)](https://cocoapods.org/pods/WBWebView)
 
 ## Example
+![效果显示](https://github.com/huipengo/WBWebView/blob/master/webview.gif)
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
@@ -22,12 +23,12 @@ pod 'WBWebView'
 
 ## Author
 
-彭辉, penghui_only@163.com
+彭辉,  penghui_only@163.com
 
 ## License
 
 WBWebView is available under the MIT license. See the LICENSE file for more info.
 
 ## 参考
-[https://github.com/devedbox/AXWebViewController](https://github.com/devedbox/AXWebViewController)
-[https://github.com/llyouss/PAWeView](https://github.com/llyouss/PAWeView)
+* [https://github.com/devedbox/AXWebViewController](https://github.com/devedbox/AXWebViewController) </br>
+* [https://github.com/llyouss/PAWeView](https://github.com/llyouss/PAWeView)
