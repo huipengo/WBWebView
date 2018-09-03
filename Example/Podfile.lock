@@ -1,0 +1,16 @@
+PODS:
+  - WBWebView (0.1.0)
+
+DEPENDENCIES:
+  - WBWebView (from `../`)
+
+EXTERNAL SOURCES:
+  WBWebView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  WBWebView: 406ba72c8ded30bbc9972ab9bfbdf627c24b959a
+
+PODFILE CHECKSUM: 4bdee6920d1ea1a971aa1f1f3317a80a15ee0873
+
+COCOAPODS: 1.5.3
