@@ -83,9 +83,6 @@
     _showNavigationCloseBarButtonItem = YES;
     _maxAllowedTitleLength = 12;
     _checkUrlCanOpen = YES;
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.extendedLayoutIncludesOpaqueBars = NO;
 }
 
 - (instancetype)initWithURL:(NSURL*)pageURL {
@@ -150,6 +147,17 @@
 
 - (void)setupSubviews {
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
+    if (@available(iOS 11.0, *)) {
+        self.webView.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
     id topLayoutGuide = self.topLayoutGuide;
     id bottomLayoutGuide = self.bottomLayoutGuide;
     
@@ -157,7 +165,7 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_backgroundLabel(<=width)]" options:0 metrics:@{@"width":@([UIScreen mainScreen].bounds.size.width)} views:NSDictionaryOfVariableBindings(_backgroundLabel)]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_backgroundLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
 
-    CGFloat constant = 44.0f + [[UIApplication sharedApplication] statusBarFrame].size.height + 30.0f;
+    CGFloat constant = [[UIApplication sharedApplication] statusBarFrame].size.height + 10.0f;
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_backgroundLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0f constant:constant]];
     
     // Add web view.
@@ -237,7 +245,7 @@
 
 - (void)wb_scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y;
-    CGFloat top = self.backgroundLabel.frame.origin.y;
+    CGFloat top = (self.backgroundLabel.frame.origin.y + [[UIApplication sharedApplication] statusBarFrame].size.height);
     CGFloat alpha = MIN(1.0f, ((- offsetY - top) / top));
     self.backgroundLabel.alpha = alpha;
 }
@@ -441,10 +449,13 @@
     }
     
     if (self.presentingViewController && self.navigationController.viewControllers.count == 1) {
-        [self dismissViewControllerAnimated:YES completion:NULL];
+        [self dismissViewControllerAnimated:YES completion:^{
+            !self.dismissWebViewCompletion?:self.dismissWebViewCompletion();
+        }];
     }
     else {
         [self.navigationController popViewControllerAnimated:YES];
+        !self.dismissWebViewCompletion?:self.dismissWebViewCompletion();
     }
 }
 

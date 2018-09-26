@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NSURLSessionAuthChallengeDisposition (^WKWebViewDidReceiveAuthenticationChallengeHandler)(WKWebView *webView, NSURLAuthenticationChallenge *challenge, NSURLCredential * _Nullable __autoreleasing * _Nullable credential);
 API_AVAILABLE(ios(8.0))
 
+typedef void(^WBDismissWebViewCompletion)(void);
+
 @interface WBWebViewController : UIViewController
 
 @property (nonatomic, strong, readonly) WBWebView *webView;
@@ -50,6 +52,8 @@ API_AVAILABLE(ios(8.0))
 @property (nonatomic, assign) BOOL checkUrlCanOpen API_AVAILABLE(ios(8.0));
 
 @property (nonatomic, strong) NSArray<NSString *> *removeElementIds;
+
+@property (nonatomic, copy) WBDismissWebViewCompletion dismissWebViewCompletion;
 
 
 /// Get a instance of `WBWebViewController` by a url.

@@ -162,7 +162,7 @@
         NSArray *cookieStorage = self.sharedHTTPCookieStorage;
         for (NSHTTPCookie *cookie in cookieStorage) {
             if ([domain containsString:cookie.domain]) {
-                [cookieSting appendString:[NSString stringWithFormat:@"%@ = %@;",cookie.name,cookie.value]];
+                [cookieSting appendString:[NSString stringWithFormat:@"%@=%@;",cookie.name,cookie.value]];
             }
         }
         if (cookieSting.length > 1) {
