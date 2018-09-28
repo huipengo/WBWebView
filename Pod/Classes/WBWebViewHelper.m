@@ -120,6 +120,10 @@ static NSString *const wbNetworkErrorURLKey = @"wb_network_error";
         // Reload the original URL.
         [webViewController loadURL:webViewController.URL];
     }
+    else if (navigationAction.navigationType == WKNavigationTypeBackForward) {
+        [webView reload];
+    }
+    
     // Update the items.
     [webViewController updateNavigationItems];
     [webViewController updateToolbarItems];
